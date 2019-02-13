@@ -98,8 +98,8 @@ CHECK(predictor->Run(slots, &outputs));
 
 两种模式中，第一种比较方便；第二种则可以严格控制内存的管理，便于与 `tcmalloc` 等库的集成。
 
-### 基于 contrib::AnalysisConfig  提升性能
-*AnalyisConfig 目前正在预发布阶段，用 `namespace contrib` 进行了保护，后续可能会有调整*
+### 基于 AnalysisConfig  提升性能
+
 
 类似 `NativeConfig` ， `AnalysisConfig` 可以创建一个经过一系列优化的高性能预测引擎。 其中包含了计算图的分析和优化，以及对一些重要 Op 的融合改写等，**对使用了 While, LSTM, GRU 等模型性能有大幅提升** 。
 
@@ -117,7 +117,7 @@ config.SwitchIrOptim();                  // 打开优化开关，运行时会执
 
 ```c++
 auto predictor =
-      paddle::CreatePaddlePredictor<paddle::contrib::AnalysisConfig>(config); // 注意这里需要 AnalysisConfig
+      paddle::CreatePaddlePredictor(config); // 注意这里需要 AnalysisConfig
 // 创建输入 tensor
 int64_t data[4] = {1, 2, 3, 4};
 paddle::PaddleTensor tensor;
